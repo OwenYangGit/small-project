@@ -9,7 +9,6 @@ MYSQL_ROOT_PASSWORD=mydemo
 ## Init demo db
 ```
 docker exec -i dev-maria sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < ./project/demo.sql
-
 ```
 
 ## How to check execute success or failed
