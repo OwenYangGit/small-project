@@ -9,3 +9,10 @@ services:
     container_name: dev-code-server
     volumes: 
       - ./project:/root/project
+  mariadb:
+    image: mariadb/server:10.4
+    ports:
+      - "3306:3306"
+    container_name: dev-maria
+    env_file:
+      - "myenv"
