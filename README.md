@@ -21,3 +21,6 @@ show columns from tasks;
 ```
 ### Reference link
 [Dockerhub - mariadb](https://hub.docker.com/_/mariadb)
+
+### Lab Link
+[參考 mariadb demo](https://hackernoon.com/how-to-connect-mariadb-docker-containers-with-java-spring-and-jdbc-ex243urb)

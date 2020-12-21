@@ -5,14 +5,14 @@ services:
     image: hongyuanyang/my-dev:mvn3.6.3-openjdk-11
     ports:
       - "8081:80"
-      - "5000:5000"
+      - "8080:8080"
     container_name: dev-code-server
     volumes: 
       - ./project:/root/project
-  mariadb:
-    image: mariadb/server:10.4
+  mysql:
+    image: mysql:5.6
     ports:
-      - "3306:3306"
-    container_name: dev-maria
+      - "3307:3306"
+    container_name: dev-mysql
     env_file:
       - "myenv"
