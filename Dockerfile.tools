@@ -1,0 +1,13 @@
+FROM maven:3.6.3-openjdk-11 as builder
+
+COPY ./internal-tools /root/internal-tools
+
+WORKDIR /root/internal-tools
+
+RUN mvn clean package
+
+FROM openjdk:11.0.9.1-jre
+
+COPY --from=builder /root/internal-tools/target/*.jar /root/
+
+CMD java -jar /root/*.jar
