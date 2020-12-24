@@ -7,7 +7,7 @@ MYSQL_PASSWORD=mypass # change it !
 TZ=Asia/Taipei
 ```
 
-### Spring Guide Practice
+### Spring Guide Practice , `practice` folder
 - Accessing Relational Data using JDBC with Spring
 - Building a RESTful Web Service
 - Accessing Data with JPA
