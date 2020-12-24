@@ -41,7 +41,7 @@ curl -d "company=mycom&service=demo-service" http://url/record/id
 curl -H "Content-Type: application/json" -X POST -d {\"company\":\"mycom\",\"service\":\"my-service-name\",\"version\":\"dev-1.0.0\"} http://url/record
 ```
 
-### `PUT /record/{id}` 更新已存在的 record 物件
+#### `PUT /record/{id}` 更新已存在的 record 物件
 ```
 curl -X PUT -d version="dev-new-1.0.0" http://url/record/3
 ```
