@@ -7,7 +7,6 @@ import com.devops.internaltools.service.RecordService;
 import com.devops.internaltools.model.Record;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,7 +45,6 @@ public class RecordController {
 
     @PutMapping(value = "/record/{id}")
     public ResponseEntity<?> updateRecord(@PathVariable Integer id , @RequestParam(value = "version") String vs){
-        service.updateDeployVersionById(id, vs);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return service.updateDeployVersionById(id, vs);
     }
 }
