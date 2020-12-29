@@ -35,13 +35,16 @@ curl http://url/record/3
 ```
 curl -d "company=mycom&service=demo-service" http://url/record/id
 ``` 
+##### 返回該 id 或 null
 
 #### `POST /record` 存入新 record 
 ```
 curl -H "Content-Type: application/json" -X POST -d {\"company\":\"mycom\",\"service\":\"my-service-name\",\"version\":\"dev-1.0.0\"} http://url/record
 ```
+##### 返回 success 或 error
 
 #### `PUT /record/{id}` 更新已存在的 record 物件
 ```
 curl -X PUT -d version="dev-new-1.0.0" http://url/record/3
 ```
+##### 返回 success 或 null 或 error

@@ -59,7 +59,7 @@ public class RecordService {
             }
         } catch(Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>("error",HttpStatus.OK);
         }
     }
 
@@ -71,13 +71,13 @@ public class RecordService {
                 existCompany.setPreviousDeployTime(existCompany.getDeployTime());
                 existCompany.setPreviousVersion(existCompany.getVersion());
                 existCompany.setVersion(vs);
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<String>("success",HttpStatus.OK);
             } else {
-                return new ResponseEntity<String>("error",HttpStatus.OK);
+                return new ResponseEntity<String>("null",HttpStatus.OK);
             }
         } catch (NoSuchElementException e){
             e.printStackTrace();
-            return new ResponseEntity<String>("null",HttpStatus.OK);
+            return new ResponseEntity<String>("error",HttpStatus.OK);
         }
     }
 }
