@@ -25,11 +25,13 @@ TZ=Asia/Taipei
 ### internal-tools API 使用
 
 #### `GET /records/` 取得所有 record , 返回 List []
+##### 返回一個 json array
 
 #### `GET /record/{id}` 透過 id 取得單一 record 物件
 ```
 curl http://url/record/3
 ```
+##### 返回該物件的 json
 
 #### `GET /record/id` 取得單一 record 的 id , 透過 company 和 service 參數查找
 ```
