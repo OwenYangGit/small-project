@@ -36,7 +36,7 @@ public class RecordService {
     // 透過 company 和 service 取得 id (唯一辨識值)
     public ResponseEntity<?> getIdByServiceAndCompany(String svc , String com) {
         if(repo.findByServiceAndCompany(svc , com).isEmpty()) {
-            return new ResponseEntity<String>("Not found" , HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("null" , HttpStatus.OK);
         } else {
             Record existsRecord = repo.findObjByServiceAndCompany(svc, com);
             return new ResponseEntity<Integer>(existsRecord.getId(),HttpStatus.OK);
@@ -52,10 +52,10 @@ public class RecordService {
                 System.out.print(now.toString());
                 com.setDeployTime(now);
                 repo.save(com);
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<String>("success",HttpStatus.OK);
             }   else {
                 System.out.print(com.getCompany().concat("/").concat(com.getService().concat(" is exists")));
-                return new ResponseEntity<Record>(com ,HttpStatus.UNPROCESSABLE_ENTITY);
+                return new ResponseEntity<String>("error" ,HttpStatus.OK);
             }
         } catch(Exception e) {
             e.printStackTrace();
@@ -73,11 +73,11 @@ public class RecordService {
                 existCompany.setVersion(vs);
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<String>("error",HttpStatus.OK);
             }
         } catch (NoSuchElementException e){
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>("null",HttpStatus.OK);
         }
     }
 }
