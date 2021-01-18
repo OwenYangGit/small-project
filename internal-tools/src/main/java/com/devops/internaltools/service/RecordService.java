@@ -78,4 +78,32 @@ public class RecordService {
             return new ResponseEntity<String>("error",HttpStatus.OK);
         }
     }
+    
+    // 處理 microsoft post 表單的 post request
+    public ResponseEntity<?> processDeploymentForm(Record postForm){
+        try {
+            if(repo.findByServiceAndCompany(postForm.getService(),postForm.getCompany()).isEmpty()){
+                // not found mapping record so , post new record in table
+                System.out.println("Not found the object in repo");
+                repo.save(postForm);
+                return new ResponseEntity<String>("success",HttpStatus.OK);
+            } else {
+                System.out.println("Found the object in repo");
+                // get old record
+                Record existsRecord = repo.findObjByServiceAndCompany(postForm.getService(),postForm.getCompany());
+                // get now time
+                ZoneId zid = ZoneId.of("Asia/Taipei");
+                ZonedDateTime now = ZonedDateTime.now(zid);
+                // update old record
+                existsRecord.setPreviousDeployTime(existsRecord.getDeployTime());
+                existsRecord.setPreviousVersion(existsRecord.getVersion());
+                existsRecord.setDeployTime(now);
+                existsRecord.setVersion(postForm.getVersion());
+                return new ResponseEntity<String>("success",HttpStatus.OK);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("error",HttpStatus.OK);
+        }
+    }
 }

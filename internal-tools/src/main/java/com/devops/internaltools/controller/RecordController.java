@@ -47,4 +47,9 @@ public class RecordController {
     public ResponseEntity<?> updateRecord(@PathVariable Integer id , @RequestParam(value = "version") String vs){
         return service.updateDeployVersionById(id, vs);
     }
+
+    @PostMapping(value = "/record/form")
+    public ResponseEntity<?> processForm(@RequestBody Record form) {
+        return service.processDeploymentForm(form);
+    }
 }

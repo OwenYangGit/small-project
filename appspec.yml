@@ -1,0 +1,21 @@
+version: 0.0
+os: linux
+# files:
+#   - source: scripts
+#     destination: /opt/scripts
+hooks:
+  BeforeInstall:
+    - location: scripts/before-install.sh
+      timeout: 10
+  AfterInstall:
+    - location: scripts/after-install.sh
+      timeout: 180
+      runas: ubuntu
+  ApplicationStart:
+    - location: scripts/application-start.sh
+      timeout: 3600
+      runas: ubuntu
+  ValidateService:
+    - location: scripts/validate-service.sh
+      timeout: 60
+      runas: ubuntu
