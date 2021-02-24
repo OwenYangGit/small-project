@@ -33,12 +33,12 @@ public class Record {
     @Column(name="PREVIOUS_VERSION")
     private String pvs;
 
-    @Column(name="DEPLOY_TIME" , columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name="UPLOADS_TIME" , columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     @UpdateTimestamp
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private ZonedDateTime dt;
 
-    @Column(name="PREVIOUS_DEPLOY_TIME")
+    @Column(name="PREVIOUS_UPLOADS_TIME")
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private ZonedDateTime pdt;
 
