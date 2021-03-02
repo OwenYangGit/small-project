@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javassist.bytecode.stackmap.BasicBlock.Catch;
+
 @Service
 @Transactional
 public class RecordService {
@@ -104,6 +106,36 @@ public class RecordService {
         } catch(Exception e) {
             e.printStackTrace();
             return new ResponseEntity<String>("error",HttpStatus.OK);
+        }
+    }
+    
+    // 新增處理 microsoft 表單的 applier 和 form_uid
+    public ResponseEntity<?> msForm(Record myform) {
+        if((myform.getFormId() == null) || (myform.getApplier().isEmpty())){
+            System.out.println("沒有 formId 和 applier 欄位");
+            return new ResponseEntity<String>("error", HttpStatus.OK);
+        }
+        if((repo.findByServiceAndCompany(myform.getService(), myform.getCompany()).isEmpty())){
+            System.out.println("資料庫沒有這筆資料 , 存入物件");
+            ZoneId zid = ZoneId.of("Asia/Taipei");
+            ZonedDateTime now = ZonedDateTime.now(zid);
+            myform.setDeployTime(now);
+            repo.save(myform);
+            return new ResponseEntity<String>("success",HttpStatus.OK);
+        } else {
+            System.out.println("從資料庫撈出這筆 Record 並實體化");
+            ZoneId zid = ZoneId.of("Asia/Taipei");
+            ZonedDateTime now = ZonedDateTime.now(zid);
+            Record existsRecord = repo.findObjByServiceAndCompany(myform.getService(), myform.getCompany());
+            // 處理新欄位 formId 和 applier
+            existsRecord.setApplier(myform.getApplier());
+            existsRecord.setFormId(myform.getFormId());
+            // 更新舊 record
+            existsRecord.setPreviousDeployTime(existsRecord.getDeployTime());
+            existsRecord.setPreviousVersion(existsRecord.getVersion());
+            existsRecord.setDeployTime(now);
+            existsRecord.setVersion(myform.getVersion());
+            return new ResponseEntity<String>("success",HttpStatus.OK);
         }
     }
 }

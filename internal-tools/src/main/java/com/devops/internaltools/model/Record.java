@@ -12,8 +12,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.Getter;
+import lombok.Setter;
+
 
 @Entity
+@Getter
+@Setter
 @Table(name = "version")
 public class Record {
 
@@ -42,10 +47,16 @@ public class Record {
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private ZonedDateTime pdt;
 
+    @Column(name="FORM_UID")
+    private @Getter @Setter Integer formId;
+
+    @Column(name="APPLIER")
+    private @Getter @Setter String applier;
+
     protected Record() {
     }
 
-    public Record(Integer id , String company , String service , String vs , String pvs , ZonedDateTime dt , ZonedDateTime pdt) {
+    public Record(Integer id , String company , String service , String vs , String pvs , ZonedDateTime dt , ZonedDateTime pdt , Integer formId , String applier) {
         this.id = id;
         this.company = company;
         this.service = service;
@@ -53,6 +64,8 @@ public class Record {
         this.pvs = pvs;
         this.dt = dt;
         this.pdt = pdt;
+        this.formId = formId;
+        this.applier = applier;
     }
 
     public Integer getId() {

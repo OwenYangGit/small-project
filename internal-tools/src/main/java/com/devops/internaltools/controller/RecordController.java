@@ -52,4 +52,9 @@ public class RecordController {
     public ResponseEntity<?> processForm(@RequestBody Record form) {
         return service.processDeploymentForm(form);
     }
+
+    @PostMapping(value = "/ms/form")
+    public ResponseEntity<?> saveForm(@RequestBody Record form) {
+        return service.msForm(form);
+    }
 }

@@ -50,3 +50,16 @@ curl -H "Content-Type: application/json" -X POST -d {\"company\":\"mycom\",\"ser
 curl -X PUT -d version="dev-new-1.0.0" http://url/record/3
 ```
 ##### 返回 success 或 null 或 error
+
+#### `POST /ms/form` 新增 applier 和 formId 欄位
+```
+curl --location --request POST 'localhost:8080/ms/form' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "company": "cimforce",
+    "service": "cnc-mfc-service",
+    "version": "release-1.0.1",
+    "formId": "3144",
+    "applier": "devops2"
+}'
+```
