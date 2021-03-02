@@ -21,6 +21,8 @@ TZ=Asia/Taipei
 - 前版本號(會自動抓取上一版塞入 , 若是第一次更新則為 NULL)
 - 當前版本佈署時間
 - 前次版本佈署時間(會自動抓取上次當前版本佈署時間塞入 , 若是第一次更新回 Null)
+- 申請人 ( 21/03/02 新增欄位 , 可以 null , 兼容先前 data)
+- 表單 ID ( 21/03/02 新增欄位 , 可以 null , 兼容先前 data)
 
 ### internal-tools API 使用
 
@@ -56,10 +58,10 @@ curl -X PUT -d version="dev-new-1.0.0" http://url/record/3
 curl --location --request POST 'localhost:8080/ms/form' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "company": "cimforce",
-    "service": "cnc-mfc-service",
-    "version": "release-1.0.1",
+    "company": "myCom",
+    "service": "my-service",
+    "version": "v1",
     "formId": "3144",
-    "applier": "devops2"
+    "applier": "devops"
 }'
 ```
